@@ -2,4 +2,6 @@
     --background-color: #ffff;
     --text-color: black;
     --card-background: #469946;
+    --button-background-color: rgb(67, 175, 72);
+    --button-onhover: rgb(37, 156, 37);
 }
