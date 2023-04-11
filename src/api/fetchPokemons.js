@@ -1,8 +1,22 @@
 import axios from "axios";
 
-const BASE_URL = 'https://pokeapi.co/api/v2';
+export const BASE_URL = 'https://pokeapi.co/api/v2';
 
-export const fetchPokemons = async(limit, offset) => {
+export const fetchPokemons = async(limit, offset, gen) => {
+    if(gen){
+      try{
+        return axios.get(BASE_URL + '/generation/' + gen)
+        .then(response => {
+          const pokemonList = response.data.pokemon_species.slice(offset, offset + limit);
+          return {
+            results: pokemonList,
+            count: response.data.pokemon_species.length,
+          };
+        })
+      }catch(e){
+        console.log(e);
+      }
+    }
     try {
         const { data } = await axios.get(BASE_URL + `/pokemon?limit=${limit}&offset=${offset}`);
         return data;
